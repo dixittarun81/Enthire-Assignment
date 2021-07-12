@@ -204,7 +204,7 @@ export default function App() {
                   console.log(error)
                 })
 
-            }, 5000)}
+            }, 10000)}
             onPointerUpdate={(payload) => {}}
             onCollabButtonClick={() =>
               window.alert("You clicked on collab button")

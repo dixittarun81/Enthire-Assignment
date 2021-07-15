@@ -8,9 +8,11 @@ import Excalidraw, {
 } from "@excalidraw/excalidraw";
 import InitialData from "./initialData";
 import Sidebar from "./sidebar/sidebar";
-
 import "./styles.scss";
 import initialData from "./initialData";
+
+
+const baseUrl = "http://localhost:4000"
 
 const renderTopRightUI = () => {
   return (
@@ -173,18 +175,19 @@ export default function App() {
                   shouldAddWatermark,
                 },
               });
+
+
               //Url of room can be extracted and passed to this variable so that every room link has an unique image upload
-              let room = "random1"
+              let room = "random2"
               const myFile = blobToFile(blob, `${room}.png`);
 
-              //console.log(myFile);
+              
 
               //Axios for uploading image to node server
               const data = new FormData();
               data.append('file', myFile, myFile.name);
-              let urlUpload = "http://localhost:4000/uploadImage";
-              
-              axios.post(urlUpload, data)
+
+              axios.post(`${baseUrl}/api/uploadImage`, data)
               .then(response => {
                 console.log(response)
               })
@@ -195,8 +198,7 @@ export default function App() {
 
                //Retreiving files list array
 
-                let getUrl = "http://localhost:4000/getImages";
-                axios.get(getUrl, data)
+                axios.get(`${baseUrl}/api/getImages`, data)
                 .then(response => {
                   console.log(response)
                 })
